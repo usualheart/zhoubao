@@ -1,0 +1,34 @@
+#yml可以把所有Profile的配置属性都放在一个application.yml文件中 通过---进行分割
+#这里没有指定spring.profiles因此这里的属性对全部prifile都生效 
+spring:
+  #  mvc:
+  #    static-path-pattern: /resources/**
+    resources:
+      static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/,  classpath:/static/
+  zhoubao:
+    location: C:/Users/xyz/Documents/zhoubaoPublic/
+  server:
+    port: 3000
+      
+  ---
+  # 下边的部分对设置的spring环境属性生效
+  #dev 环境配置
+  spring:
+    profiles: dev
+    resources:
+      static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/, classpath:/static
+  zhoubao:
+    location: C:/Users/xyz/Documents/zhoubaoPublic/
+  server:
+    port: 3000
+  ---
+  # prod 环境配置
+  spring:
+    profiles: prod
+    resources:
+      static-locations: file:/home/user/Documents/zhoubaoPublic/, classpath:/static/
+      
+  zhoubao:
+    location: /home/user/Documents/zhoubaoPublic/
+  server:
+    port: 3000
