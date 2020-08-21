@@ -5,30 +5,30 @@ spring:
   #    static-path-pattern: /resources/**
     resources:
       static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/,  classpath:/static/
-  zhoubao:
+zhoubao:
     location: C:/Users/xyz/Documents/zhoubaoPublic/
-  server:
+server:
     port: 3000
       
-  ---
-  # 下边的部分对设置的spring环境属性生效
-  #dev 环境配置
-  spring:
-    profiles: dev
-    resources:
-      static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/, classpath:/static
-  zhoubao:
-    location: C:/Users/xyz/Documents/zhoubaoPublic/
-  server:
-    port: 3000
-  ---
-  # prod 环境配置
-  spring:
-    profiles: prod
-    resources:
-      static-locations: file:/home/user/Documents/zhoubaoPublic/, classpath:/static/
-      
-  zhoubao:
-    location: /home/user/Documents/zhoubaoPublic/
-  server:
-    port: 3000
+---
+# 下边的部分对设置的spring环境属性生效
+#dev 环境配置
+spring:
+  profiles: dev
+  resources:
+    static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/, classpath:/static
+zhoubao:
+  location: C:/Users/xyz/Documents/zhoubaoPublic/
+server:
+  port: 3000
+---
+# prod 环境配置
+spring:
+  profiles: prod
+  resources:
+    static-locations: file:/home/user/Documents/zhoubaoPublic/, classpath:/static/
+    
+zhoubao:
+  location: /home/user/Documents/zhoubaoPublic/
+server:
+  port: 3000
