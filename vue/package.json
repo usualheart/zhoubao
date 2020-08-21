@@ -17,7 +17,7 @@
     "element-ui": "^2.8.2",
     "github-markdown-css": "^3.0.1",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "marked": "^0.7.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
