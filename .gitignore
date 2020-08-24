@@ -1,3 +1,6 @@
+# github linguist
+* linguist-vendored
+vue/theme/ linguist-vendored=false
 # Compiled class file
 *.class
 
