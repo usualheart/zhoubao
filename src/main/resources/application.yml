@@ -3,8 +3,22 @@
 spring:
   #  mvc:
   #    static-path-pattern: /resources/**
+    #配置静态资源
     resources:
       static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/,  classpath:/static/
+    datasource:
+      # 数据库基本配置 
+      url: jdbc:mysql://127.0.0.1:3306/YourDatabaseName?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+      username: username
+      password: password
+    jpa:
+      # 这里对spring data jpa与数据库列进行关联的方式进行修改
+      hibernate:
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      # 显示后台处理的SQL语句
+      show-sql: true
+#配置周报存储的位置      
 zhoubao:
     location: C:/Users/xyz/Documents/zhoubaoPublic/
 server:
@@ -12,22 +26,20 @@ server:
       
 ---
 # 下边的部分对设置的spring环境属性生效
-#dev 环境配置
-spring:
-  profiles: dev
-  resources:
-    static-locations: file:C:/Users/xyz/Documents/zhoubaoPublic/, classpath:/static
-zhoubao:
-  location: C:/Users/xyz/Documents/zhoubaoPublic/
-server:
-  port: 3000
----
 # prod 环境配置
 spring:
   profiles: prod
   resources:
     static-locations: file:/home/user/Documents/zhoubaoPublic/, classpath:/static/
-    
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/YourDatabaseName?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+      username: username
+      password: password
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true  
 zhoubao:
   location: /home/user/Documents/zhoubaoPublic/
 server:
