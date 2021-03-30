@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 import zhoubao.data.ZhouBaoRepository;
 import zhoubao.domain.ZhouBao;
 import zhoubao.domain.ZhouBaoUserInfo;
+import zhoubao.modules.oss.OSSFactory;
+import zhoubao.modules.oss.StorageService;
 
 @RestController // 为该控制器的所有处理方法应用消息转换功能
 @RequestMapping(value = "/zhoubao")
@@ -32,6 +34,9 @@ public class ZhouBaoRESTController {
 	private ZhouBaoRepository zhouBaoRepository;
 	@Autowired
 	Environment env;// 用于读取配置中的文件
+
+	@Autowired
+	StorageService storageService;// 用于存储周报文件
 
 	// 处理路径参数 按照userName查找用户周报数据
 	@RequestMapping(value = "/getSomeone/{userName}", method = RequestMethod.GET)
@@ -72,22 +77,11 @@ public class ZhouBaoRESTController {
 			type = "MarkdownFile";
 		}
 
-		String parentPath = "user/" + userName + "/" + type + '/';
-		String fileName, relativePath;
-		File fileToSave;
-		// 用来防止同名文件
-		do {
-			fileName = (int) (Math.random() * 1000) + "-" + pdfMdMultipartFile.getOriginalFilename();
-			relativePath = parentPath + fileName;
-			fileToSave = new File(env.getProperty("zhoubao.location") + relativePath);
-		} while (fileToSave.exists());
-		fileToSave.getParentFile().mkdirs();// 创建文件目录
+		String path = "user/" + userName + "/" + type + '/'+ (int) (Math.random() * 1000) + "-" + pdfMdMultipartFile.getOriginalFilename();
 
-		// 存储文件到新路径 这里的相对路径 相对的是MultipartFile文件缓存的位置
-		pdfMdMultipartFile.transferTo(fileToSave);
-		ZhouBao newZhouBao = new ZhouBao(userName, relativePath, new Date(), WeekNo.getWeekCount());
+		storageService.upload(pdfMdMultipartFile.getBytes(),path);
+		ZhouBao newZhouBao = new ZhouBao(userName, path, new Date(), WeekNo.getWeekCount());
 		zhouBaoRepository.save(newZhouBao);
-
 	}
 
 	// 删除指定pdf周报 所删除的周报id在json中

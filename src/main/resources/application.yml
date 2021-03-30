@@ -22,11 +22,18 @@ server:
     port: 3000
 #配置周报相关位置      
 zhoubao:
-    location: D:/ipv6download/ #周报存储位置
     database-config: #周报数据库配置
       name: YourDatabaseName
       username: username
       password: password
+    oss-type: minio #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
+    location: D:/ipv6download/ #周报存储位置
+    minio-config:
+      endpoint: http://127.0.0.1:9000
+      access-key: minioadmin
+      secret-key: minioadmin
+
+
 
       
 ---
@@ -35,8 +42,13 @@ zhoubao:
 spring:
   profiles: prod
 zhoubao:
-  location: /home/Documents/
-  database-config: #周报数据库配置
-    name: YourDatabaseName
-    username: username
-    password: password
+    database-config: #周报数据库配置
+      name: YourDatabaseName
+      username: username
+      password: password
+    oss-type: minio #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
+    location: /home/zhoubao/ #周报存储位置
+    minio-config:
+      endpoint: http://127.0.0.1:9000
+      access-key: minioadmin
+      secret-key: minioadmin
