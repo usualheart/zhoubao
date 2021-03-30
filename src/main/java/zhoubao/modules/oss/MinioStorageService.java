@@ -48,19 +48,10 @@ public class MinioStorageService extends StorageService{
     }
 
     @Override
-    public String uploadSuffix(byte[] data, String suffix) {
-        return null;
-    }
-
-    @Override
     public String upload(InputStream inputStream, String path) {
         return null;
     }
 
-    @Override
-    public String uploadSuffix(InputStream inputStream, String suffix) {
-        return null;
-    }
     public static void main(String []args){
         //测试minio上传功能
         MinioStorageService minioStorageService=new MinioStorageService("http://172.16.1.100:9000","minioadmin","minioadmin");

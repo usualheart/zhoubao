@@ -35,17 +35,7 @@ public class LocalStorageService extends StorageService{
     }
 
     @Override
-    public String uploadSuffix(byte[] data, String suffix) {
-        return null;
-    }
-
-    @Override
     public String upload(InputStream inputStream, String path) {
-        return null;
-    }
-
-    @Override
-    public String uploadSuffix(InputStream inputStream, String suffix) {
         return null;
     }
 }
