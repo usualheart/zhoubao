@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 //引入elemant
 import Element from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(Element)
 
 //axios 跨域相关（跨域用于测试环境与后台服务器的通信）
