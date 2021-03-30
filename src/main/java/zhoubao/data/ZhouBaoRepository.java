@@ -18,7 +18,7 @@ public interface ZhouBaoRepository extends JpaRepository<ZhouBao,Integer> {
 	List<ZhouBao>findAllOrderByIdDesc();
 	//返回结果映射到对象 并返回 ZhouBaoUserInfo继承了Serializable接口
 	@Query(value = " SELECT new zhoubao.domain.ZhouBaoUserInfo(z.id,z.userName,z.filePath,z.time,z.week,z.pingjia,u.type,u.year)  "
-			+ "FROM ZhouBao z, ZhouUser u where z.userName=u.username and z.week>?1 order by z.week desc,u.type desc,u.year"
+			+ "FROM ZhouBao z, ZhouUser u where z.userName=u.username  order by z.week desc,u.type desc,u.year"
 			)
 	List<ZhouBaoUserInfo> findRecentWithUserInfo(Integer week);
 
