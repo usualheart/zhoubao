@@ -26,7 +26,7 @@ zhoubao:
       name: YourDatabaseName
       username: username
       password: password
-    oss-type: minio #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
+    oss-type: local #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
     location: D:/ipv6download/ #周报存储位置
     minio-config:
       endpoint: http://127.0.0.1:9000
@@ -46,7 +46,7 @@ zhoubao:
       name: YourDatabaseName
       username: username
       password: password
-    oss-type: minio #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
+    oss-type: local #local或minio 当为minio时需要填写minio-config中的内容；当为local时文件保存在location对应的路径
     location: /home/zhoubao/ #周报存储位置
     minio-config:
       endpoint: http://127.0.0.1:9000
