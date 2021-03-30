@@ -78,8 +78,7 @@ public class ZhouBaoRESTController {
 		}
 
 		String path = "user/" + userName + "/" + type + '/'+ (int) (Math.random() * 1000) + "-" + pdfMdMultipartFile.getOriginalFilename();
-
-		storageService.upload(pdfMdMultipartFile.getBytes(),path);
+		storageService.upload(pdfMdMultipartFile,path);
 		ZhouBao newZhouBao = new ZhouBao(userName, path, new Date(), WeekNo.getWeekCount());
 		zhouBaoRepository.save(newZhouBao);
 	}

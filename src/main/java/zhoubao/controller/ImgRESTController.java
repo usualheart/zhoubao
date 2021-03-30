@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import zhoubao.data.ZhouBaoRepository;
 import zhoubao.domain.ZhouBao;
+import zhoubao.modules.oss.StorageService;
 
 @RestController // 为该控制器的所有处理方法应用消息转换功能
 @RequestMapping(value = "/img", produces = "text/html;charset=UTF-8")
@@ -26,26 +27,18 @@ public class ImgRESTController {
 
 	@Autowired
 	Environment env;// 用于读取配置中的文件
+	@Autowired
+	StorageService storageService;
 
 	// 上传pdf或md文件的处理器
 	@RequestMapping(value = "/uploadImg/{userName}", method = RequestMethod.POST)
 	public String uploadImg(@RequestPart(value = "imgMultipartFile", required = true) MultipartFile imgMultipartFile,
 			@PathVariable String userName) throws IllegalStateException, IOException {
-		String parentPath = "img/" + userName + "/";
 
-		String fileName, relativePath;
-		File fileToSave;
-		// 用来防止同名文件
-		do {
-			fileName = (int) (Math.random() * 1000) + "-" + imgMultipartFile.getOriginalFilename();
-			relativePath = parentPath + fileName;
-			fileToSave = new File(env.getProperty("zhoubao.location") + relativePath);
-		} while (fileToSave.exists());
-		fileToSave.getParentFile().mkdirs();// 创建文件目录
-
-		// 存储文件到新路径 这里的相对路径 相对的是MultipartFile文件缓存的位置
-		imgMultipartFile.transferTo(fileToSave);
-		return relativePath;// 返回图片相对路径
+		String path = "img/" + userName + "/"+(int) (Math.random() * 1000) + "-" + imgMultipartFile.getOriginalFilename();
+		// 存储图片
+		storageService.upload(imgMultipartFile,path);
+		return path;// 返回图片相对路径
 	}
 
 	// 删除指定路径的周报

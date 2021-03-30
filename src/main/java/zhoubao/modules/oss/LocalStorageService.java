@@ -1,6 +1,7 @@
 package zhoubao.modules.oss;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.web.multipart.MultipartFile;
 import zhoubao.controller.WeekNo;
 import zhoubao.domain.ZhouBao;
 
@@ -37,5 +38,17 @@ public class LocalStorageService extends StorageService{
     @Override
     public String upload(InputStream inputStream, String path) {
         return null;
+    }
+
+    @Override
+    public String upload(MultipartFile multipartFile, String path) {
+        File file  = new File(location+ path);
+        file.getParentFile().mkdirs();// 创建文件目录
+        try {
+            multipartFile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path;
     }
 }
